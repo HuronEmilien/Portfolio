@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parallax Montgolfière</title>
+  <style>
+    /* Pour permettre le défilement */
+    body {
+      margin: 0;
+      padding: 0;
+      height: 2000px; /* Ajuste la hauteur en fonction de ton contenu */
+      overflow-x: hidden;
+    }
+
+    /* Calque de fond (l'image avec le fond uniquement) */
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('assets/images/test.png') no-repeat center center fixed;
+      background-size: cover;
+      z-index: -2;
+    }
+
+    /* Calque de la montgolfière (image transparente) */
+    .montgolfiere {
+      position: absolute;
+      top: 100px; /* Position initiale */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%; /* Même taille que le fond pour un alignement parfait */
+      height: 100%;
+      background: url('assets/images/test1.png') no-repeat center center fixed;
+      background-size: contain;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <!-- Calque de fond -->
+  <div class="background"></div>
+
+  <!-- Calque de la montgolfière -->
+  <div class="montgolfiere" id="montgolfiere"></div>
+
+  <script>
+    // À chaque défilement, on ajuste la position de la montgolfière
+    window.addEventListener('scroll', function() {
+      // On récupère la distance scrollée
+      const scrollTop = window.pageYOffset;
+
+      // On souhaite que la montgolfière se déplace moins vite : ici, 50% de la vitesse du scroll
+      const offset = scrollTop * 0.5;
+
+      // On définit la nouvelle position verticale (top) de la montgolfière
+      document.getElementById('montgolfiere').style.top = (100 + offset) + "px";
+    });
+  </script>
+</body>
+</html>
